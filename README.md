@@ -1,4 +1,4 @@
-# fp-homeworks
+# fp-homework
 
 [![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/S0vk4/fp-homework/blob/master/LICENSE)
 
