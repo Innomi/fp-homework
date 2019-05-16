@@ -18,15 +18,27 @@ tested-with:         GHC == 8.0.1
 
 library
   hs-source-dirs:      src
-  exposed-modules:     Lib
-  ghc-options:         -Wall
-  build-depends:       base >= 4.9 && < 5
+  exposed-modules:     CHT
+                     , Gauss
+                     , Geometry
+                     , Multiply
+                     , Util
+  ghc-options:         -Wall -O3
+  build-depends:       array >= 0.5.3.0
+                     , base >= 4.9 && < 5
+                     , deepseq >= 1.4.4.0
+                     , hashable >= 1.2.7.0
+                     , loop >= 0.3.0
+                     , monad-loops >= 0.4.3
+                     , parallel >= 3.2.2.0
+                     , random >= 1.1
+                     , split >= 0.2.3.3
   default-language:    Haskell2010
 
 executable hw4
   hs-source-dirs:      app
   main-is:             Main.hs
-  ghc-options:         -Wall -Werror -threaded -rtsopts -with-rtsopts=-N
+  ghc-options:         -Wall -Werror -threaded -rtsopts -with-rtsopts=-N -O3
   build-depends:       base
                      , hw4
   default-language:    Haskell2010
@@ -34,8 +46,33 @@ executable hw4
 test-suite hw4-test
   type:                exitcode-stdio-1.0
   hs-source-dirs:      test
+  other-modules:       Test.CHT
   main-is:             Spec.hs
-  build-depends:       base
+  build-depends:       async >= 2.2.1
+                     , base
+                     , hashable >= 1.2.7.0
                      , hw4
-  ghc-options:         -Wall -Werror -threaded -rtsopts -with-rtsopts=-N
+                     , random >= 1.1
+                     , tasty >= 1.2
+                     , tasty-hspec >= 1.1.5.1
+  ghc-options:         -Wall -Werror -threaded -rtsopts -with-rtsopts=-N -eventlog
+  default-language:    Haskell2010
+
+benchmark hw4-bench
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      bench
+  other-modules:       Bench.CHT
+                     , Bench.Gauss
+                     , Bench.Geometry
+                     , Bench.Multiply
+  main-is:             MainBenchSuite.hs
+  build-depends:       async >= 2.2.1
+                     , base
+                     , hw4
+                     , criterion >= 1.5.4.0
+                     , deepseq >= 1.4.4.0
+                     , loop >= 0.3.0
+                     , matrix >= 0.3.6.1
+                     , random >= 1.1
+  ghc-options:         -Wall -Werror -threaded -rtsopts -with-rtsopts=-N -O0
   default-language:    Haskell2010
