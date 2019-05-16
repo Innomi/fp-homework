@@ -54,7 +54,7 @@ concurrentPuts = do
   cht <- newCHT
   forConcurrently_ jobs $ (flip putWorker) cht
   finalSize <- sizeCHT cht
-  ((finalSize == 400000) &&) <$> checkCHT cht pairs
+  checkCHT cht pairs
 
 chtHspecTest :: Spec
 chtHspecTest = do
